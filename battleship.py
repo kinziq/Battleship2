@@ -9,12 +9,17 @@ from time import sleep
 
 os.system("cls")
 
-global board='ooooooooooooooooooooooooo'
+board=["o"]*25
+answers=["o"]*25
+#if num ==1:
+    
+
+
 (input("Welcome to Battleship. Please type in any character on your keyboard when you are ready to start: "))
 
-rulesmessage =("This game will be seperated into a 5o5 grid. The AI will random place their own ships as this will be a one way. You will get 10 incorrect tries after which the game will end. The board will now generate soon.")
+rulesmessage =("This game will be seperated into a 5x5 grid. The AI will random place their own ships as this will be a one way. You will get 10 incorrect tries after which the game will end. The board will now generate soon.")
 print(f"{rulesmessage}")
-sleep(4)
+
 
 #board
 print("  A B C D E")
@@ -24,8 +29,9 @@ print( f'3 {board[10]} {board[11]} {board[12]} {board[13]} {board[14]}')
 print( f'4 {board[15]} {board[16]} {board[17]} {board[18]} {board[19]}')
 print( f'5 {board[20]} {board[21]} {board[22]} {board[23]} {board[24]}')
 
-guess = input("Please input your guess (A2, 2B, D3 etc.): ")
-
-if guess == ("2B"):
-  	{board[6]} == ("x")
-print({board[6]})
+attempt = True
+while attempt:   
+	guess = input("Please input your guess (A2, B2, D3 etc.): ")
+if guess == ("A2") and answers[5]=="x":
+    
+    print(board)
