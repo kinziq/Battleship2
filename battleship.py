@@ -29,9 +29,13 @@ print( f'3 {board[10]} {board[11]} {board[12]} {board[13]} {board[14]}')
 print( f'4 {board[15]} {board[16]} {board[17]} {board[18]} {board[19]}')
 print( f'5 {board[20]} {board[21]} {board[22]} {board[23]} {board[24]}')
 
-attempt = True
-while attempt:   
-	guess = input("Please input your guess (A2, B2, D3 etc.): ")
-if guess == ("A2") and answers[5]=="x":
-    
-    print(board)
+
+shipguess = dict({"A":0, "B":1, "C":2, "D":3, "E":4}) 
+guess = input("Please input your guess (A2, B2, D3 etc): ")
+if len(guess) == 2:
+  letter = guess[0]
+  row = int(guess[1])
+spot = shipguess[letter] + (row-1)*5
+if spot == 9:
+    answers[9] == "x"
+print(f'{answers[9]}')
