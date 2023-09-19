@@ -11,9 +11,6 @@ os.system("cls")
 
 board=["o"]*25
 answers=["o"]*25
-#if num ==1:
-    
-
 
 (input("Welcome to Battleship. Please type in any character on your keyboard when you are ready to start: "))
 
@@ -30,12 +27,26 @@ print( f'4 {board[15]} {board[16]} {board[17]} {board[18]} {board[19]}')
 print( f'5 {board[20]} {board[21]} {board[22]} {board[23]} {board[24]}')
 
 
+turns = 0
+leftturns = 10
 shipguess = dict({"A":0, "B":1, "C":2, "D":3, "E":4}) 
-guess = input("Please input your guess (A2, B2, D3 etc): ")
-if len(guess) == 2:
-  letter = guess[0]
-  row = int(guess[1])
-spot = shipguess[letter] + (row-1)*5
-if spot == 9:
-    answers[9] == "x"
-print(f'{answers[9]}')
+run = True
+while run:
+  guess = str.upper(input("Please input your guess (A2, B2, D3 etc): "))  
+  if len(guess) == 2:
+    
+    #Will add a turn counter if the length of the characters are equal to two to the variable turns
+    turns+=1
+    leftturns-=1
+    
+    letter = guess[0]
+    row = int(guess[1])
+    spot = shipguess[letter] + (row-1)*5
+  
+  board[spot] = ('x')
+  
+  print (f'{board}')
+  print(f"You have guessed {turns} times. You have {leftturns} turns left")
+  if turns == 10:
+    run = False
+    print("Game Over.") 
