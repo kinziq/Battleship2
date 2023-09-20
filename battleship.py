@@ -13,7 +13,6 @@ board=["o"]*25
 answers=["o"]*25
 
 (input("Welcome to Battleship. Please type in any character on your keyboard when you are ready to start: "))
-
 rulesmessage =("This game will be seperated into a 5x5 grid. The AI will random place their own ships as this will be a one way. You will get 10 incorrect tries after which the game will end. The board will now generate soon.")
 print(f"{rulesmessage}")
 
@@ -36,9 +35,10 @@ while run:
   guess = str.upper(input("Please input your guess (A2, B2, D3 etc): "))  
   if len(guess) == 2:
     
-    #Will add a turn counter if the length of the characters are equal to two to the variable turns
+    #Will add a turn counter if the length of the characters are equal to two to the variable turns. This will also include how many left turns there are.
     turns+=1
     leftturns-=1
+    
     letter = guess[0]
     row = int(guess[1])
     spot = shipguess[letter] + (row-1)*5
