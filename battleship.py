@@ -30,9 +30,12 @@ boardlayout()
 turns = 0
 leftturns = 10
 shipguess = dict({"A":0, "B":1, "C":2, "D":3, "E":4}) 
+
 run = True
 while run:
-  guess = str.upper(input("Please input your guess (A2, B2, D3 etc): "))  
+  
+  guess = str.upper(input("Please input your guess (A2, B2, D3 etc): "))
+  os.system("cls")
   if len(guess) == 2:
     
     #Will add a turn counter if the length of the characters are equal to two to the variable turns. This will also include how many left turns there are.
@@ -45,7 +48,9 @@ while run:
   
   board[spot] = ('x')
   boardlayout()
-  print(f"You have guessed {turns} times. You have {leftturns} turns left")
+  if board[spot] == ('x'):
+    
+    print(f"You have guessed {turns} times. You have {leftturns} turns left")
   if turns == 10:
     run = False
     print("Game Over.") 
