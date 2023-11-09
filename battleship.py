@@ -5,16 +5,16 @@
 #There will be a minimum of 10 incorrect guesses.
 import os
 import random
-from time import sleep
 
 os.system("cls")
 
 board=["o"]*25
-answers=["o"]*25
+answers=["xooooxoxoxooxoxxxooo"]
+guessed_spots = []
 
 (input("Welcome to Battleship. Please type in any character on your keyboard when you are ready to start: "))
-rulesmessage =("This game will be seperated into a 5x5 grid. The AI will random place their own ships as this will be a one way. You will get 10 incorrect tries after which the game will end. The board will now generate soon.")
-print(f"{rulesmessage}")
+
+print("This game will be seperated into a 5x5 grid. The AI will random place their own ships as this will be a one way. You will get 10 incorrect tries after which the game will end. The board will now generate soon.")
 
 
 #board
@@ -31,26 +31,53 @@ turns = 0
 leftturns = 10
 shipguess = dict({"A":0, "B":1, "C":2, "D":3, "E":4}) 
 
+
 run = True
 while run:
-  
   guess = str.upper(input("Please input your guess (A2, B2, D3 etc): "))
   os.system("cls")
+  if len(guess) != 2:
+        print("Invalid Guess! Please enter a valid guess!\n")
   if len(guess) == 2:
     
     #Will add a turn counter if the length of the characters are equal to two to the variable turns. This will also include how many left turns there are.
-    turns+=1
-    leftturns-=1
     
     letter = guess[0]
     row = int(guess[1])
     spot = shipguess[letter] + (row-1)*5
-  
-  board[spot] = ('x')
-  boardlayout()
-  if board[spot] == ('x'):
     
-    print(f"You have guessed {turns} times. You have {leftturns} turns left")
+     # Check if the spot has already been guessed
+    if spot in guessed_spots:
+            print("You already guessed this spot. Try again.")
+            continue  # Skip the rest of the loop and ask for input again
+        
+        # Add the guessed spot to the set
+    guessed_spots.append(spot)
+    
+    board[spot] = ('x')
+  boardlayout()
+
+  check_ships = [0, 5, 7, 9, 12, 14, 15, 16, 18, 23]
+  
+  for hit in check_ships:
+    if board[hit] == ("x"):
+      os.system("cls")
+      print(f"Nice! You hit a ship at spot {(hit)+1}.\n")
+      boardlayout()
+      print(f"You have guessed wrong {turns} times. You have {leftturns} incorrect guesses left.")      
+
+  check_bad_ships = [1, 2, 3, 4, 6, 8, 10, 11, 13, 17, 18, 19, 20, 21, 22, 24]
+  
+  for bad_hits in check_bad_ships:
+    if board[bad_hits] == ("x"):
+        os.system("cls")
+        print("Good try!\n")
+        boardlayout()
+        turns+=1
+        leftturns-=1
+        print(f"You have guessed the ships wrong {turns} times. You have {leftturns} turns left.")
+  
   if turns == 10:
     run = False
-    print("Game Over.") 
+    print("Game Over.")
+    
